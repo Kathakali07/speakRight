@@ -1,33 +1,61 @@
 import React, { useState } from 'react';
-import Navbar from './components/navbar/navbar';
-import SignupButton from "./components/signup/signup";
-import SignupForm from "./components/signup/signupform";
-import SigninForm from "./components/signup/signin";
-
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import SigninForm from './components/signup/signin';
+import SignupForm from './components/signup/signupform';
+import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
+import { isAuthenticated } from './utils/auth';
 import './App.css';
 
 function App() {
-  const [view, setView] = useState('home'); // 'home', 'signup', 'signin'
+  const [showSignin, setShowSignin] = useState(true);
+  
+  const handleSwitchToSignup = () => setShowSignin(false);
+  const handleSwitchToSignin = () => setShowSignin(true);
+  
+  // Authentication wrapper for login/signup pages
+  const AuthWrapper = () => {
+    // If already authenticated, redirect to dashboard
+    if (isAuthenticated()) {
+      return <Navigate to="/dashboard" replace />;
+    }
+    
+    // Otherwise show the login/signup form
+    return showSignin 
+      ? <SigninForm onSwitchToSignup={handleSwitchToSignup} /> 
+      : <SignupForm onSwitchToSignin={handleSwitchToSignin} />;
+  };
 
   return (
-    <>
-      <Navbar />
-      <div className="main-content">
-        {view === 'home' && (
-          <>
-            <h1 className="cursive-text">Welcome to SpeakRight</h1>
-            <h2 className="next-big-text">English is A Journey</h2>
-            <div className="signup-line-wrapper">
-              <SignupButton onClick={() => setView('signup')} />
-              <p className="signup_line">To Talk Your Way to the Top!</p>
-            </div>
-          </>
-        )}
-
-        {view === 'signup' && <SignupForm onSwitchToSignin={() => setView('signin')} />}
-        {view === 'signin' && <SigninForm onSwitchToSignup={() => setView('signup')} />}
+    <Router>
+      <div className="App">
+        <Routes>
+          {/* Login/Signup Route */}
+          <Route path="/login" element={<AuthWrapper />} />
+          
+          {/* Protected Dashboard Route */}
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          
+          {/* Redirect root to login or dashboard based on auth status */}
+          <Route path="/" element={
+            isAuthenticated() 
+              ? <Navigate to="/dashboard" replace /> 
+              : <Navigate to="/login" replace />
+          } />
+          
+          {/* Catch-all route - redirect to login or dashboard */}
+          <Route path="*" element={
+            isAuthenticated() 
+              ? <Navigate to="/dashboard" replace /> 
+              : <Navigate to="/login" replace />
+          } />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 

@@ -1,54 +1,128 @@
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import './signupform.css';
 
 function SignupForm({ onSwitchToSignin }) {
-  const [dob, setDob] = useState(null);
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
   const [agreed, setAgreed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+    
     if (!agreed) {
-      alert('You must agree to the Terms and Conditions.');
+      setError('You must agree to the Terms and Conditions.');
       return;
     }
-    alert('Form submitted!');
+    
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match!');
+      return;
+    }
+    
+    const payload = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    };
+    
+    try {
+      setLoading(true);
+      console.log("Sending signup request with:", payload.username, payload.email);
+      
+      const res = await fetch('http://localhost:8000/api/accounts/signup/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      
+      // Get the response text first
+      const textResponse = await res.text();
+      console.log("Raw signup response:", textResponse);
+      
+      // Then try to parse it as JSON
+      let data;
+      try {
+        data = JSON.parse(textResponse);
+        console.log("Parsed signup data:", data);
+      } catch (e) {
+        console.log("Signup response is not JSON");
+        data = { error: textResponse };
+      }
+      
+      if (res.ok) {
+        alert('Signup successful! You can now log in.');
+        onSwitchToSignin();
+      } else {
+        let errorMessage = 'Signup failed';
+        if (data && data.error) {
+          errorMessage += ': ' + data.error;
+        } else if (data) {
+          errorMessage += ': ' + JSON.stringify(data);
+        }
+        setError(errorMessage);
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="signup-container">
       <div className="signup-card">
         <h2>Sign up</h2>
+        {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="User name" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <input type="password" placeholder="Confirm Password" required />
-
-          <DatePicker
-            selected={dob}
-            onChange={(date) => setDob(date)}
-            dateFormat="dd-MM-yyyy"
-            placeholderText="Date of Birth"
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-            maxDate={new Date()}
+          <input
+            type="text"
+            name="username"
+            placeholder="User name"
+            value={formData.username}
+            onChange={handleChange}
             required
-            className="custom-datepicker"
           />
-
-          <select required>
-            <option value="">Select Gender</option>
-            <option value="female">Female</option>
-            <option value="male">Male</option>
-            <option value="other">Other</option>
-            <option value="prefer-not-say">Prefer not to say</option>
-          </select>
-
-          <input type="text" placeholder="Location (City, Country)" required />
-
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
           <label className="terms-label">
             <input
               type="checkbox"
@@ -58,10 +132,10 @@ function SignupForm({ onSwitchToSignin }) {
             />
             I agree to the <a href="#">Terms and Conditions</a>
           </label>
-
-          <button type="submit">Sign up</button>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Submitting...' : 'Sign up'}
+          </button>
         </form>
-
         <div className="login-text">
           Already have an account? <span onClick={onSwitchToSignin}>Sign in</span>
         </div>
