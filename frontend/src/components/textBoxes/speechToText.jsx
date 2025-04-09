@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './SpeechToText.css';
+import './speechToText.css';
 
 const SpeechToTextDisplay = ({ originalText, correctedText }) => {
   return (

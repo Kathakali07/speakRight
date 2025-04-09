@@ -9,7 +9,7 @@
   }
   
   .original-text, .corrected-text {
-    width: 48%; /* Take up equal space */
+    width: 48%; 
     padding: 10px;
   }
   
@@ -22,8 +22,8 @@
   .original-text p, .corrected-text p {
     font-size: 14px;
     color: #555;
-    word-wrap: break-word; /* Ensure long text wraps to the next line */
-    white-space: pre-wrap; /* Preserve newlines */
+    word-wrap: break-word; 
+    white-space: pre-wrap; 
   }
   
   .original-text {
