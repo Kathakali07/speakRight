@@ -95,9 +95,9 @@ def grammar_corrector(input_text):
     # Calculate the accuracy based on word changes
     accuracy = calculate_accuracy(input_text, corrected_text)
 
-    return JsonResponse({
+    return {
         "Input Text": input_text,
         "Output Text": output_text,
         "Changes": changes,
         "Accuracy": accuracy
-    })
+    }
