@@ -1,9 +1,22 @@
 import requests
+import os
+import json
+
+
 
 def speech_to_text(audio_path):
+
+    PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    config_file_path = os.path.join(PROJECT_ROOT, 'config.json')
+
+    # Load the API key from config.json
+    with open(config_file_path, 'r') as config_file:
+        config = json.load(config_file)
+    HUGGING_FACE_API_KEY = config.get("HUGGING_FACE_API_KEY")
+    
     API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large"
     headers = {
-        "Authorization": f"Bearer API_KEY"
+        "Authorization": f"Bearer {HUGGING_FACE_API_KEY}"
     }
 
     with open(audio_path, "rb") as audio_file:

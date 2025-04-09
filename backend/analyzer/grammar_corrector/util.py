@@ -82,12 +82,8 @@ def grammar_corrector(input_text):
                 change_details = []
 
                 for edit in edits:
-                    change_details.append({
-                        "Error Type": edit[0],
-                        "Incorrect Word": edit[1],
-                        "Corrected Word": edit[4]
-                    })
-                changes.append(change_details)
+                    change_str = f"{edit[1]} ➔ {edit[4]}"
+                    changes.append(change_str)
 
     # Join the corrected sentences to form the final corrected text
     corrected_text = " ".join(corrected_sentences)
@@ -95,9 +91,9 @@ def grammar_corrector(input_text):
     # Calculate the accuracy based on word changes
     accuracy = calculate_accuracy(input_text, corrected_text)
 
-    return JsonResponse({
+    return {
         "Input Text": input_text,
         "Output Text": output_text,
         "Changes": changes,
         "Accuracy": accuracy
-    })
+    }
