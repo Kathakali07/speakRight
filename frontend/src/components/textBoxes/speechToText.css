@@ -1,0 +1,42 @@
+.speech-to-text-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .original-text, .corrected-text {
+    width: 48%; /* Take up equal space */
+    padding: 10px;
+  }
+  
+  .original-text h3, .corrected-text h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .original-text p, .corrected-text p {
+    font-size: 14px;
+    color: #555;
+    word-wrap: break-word; /* Ensure long text wraps to the next line */
+    white-space: pre-wrap; /* Preserve newlines */
+  }
+  
+  .original-text {
+    background-color: #e0f7fa;
+    border-radius: 8px;
+  }
+  
+  .corrected-text {
+    background-color: #e8f5e9;
+    border-radius: 8px;
+  }
+  
+  .speech-to-text-container h3 {
+    text-align: center;
+  }
+  

@@ -71,10 +71,10 @@
   }
   
   .login-text {
-    color: #e8e2f3;
+    color: #161617;
     font-weight: bold;
     font-size: 1rem;
-    padding: 3px;
+    padding: 5px;
     border-radius: 0 0 60px 60px;
     position: absolute;
     bottom: 0;
@@ -100,20 +100,14 @@
   }
   
   .terms-label {
-    font-size: 0.9rem;
-    color: #ddd;
+    font-size: 1rem;
+    color: #0b0b0b;
     display: flex;
     align-items: center;
     gap: 8px;
     margin-top: 10px;
   }
   
-  .terms-label a {
-    color: #ffffff;
-    text-decoration: underline;
-  }
-  
-  /* Match DatePicker input with others */
 .custom-datepicker {
     width: 93%;
     padding: 12px 14px;
@@ -125,19 +119,31 @@
     transition: 0.3s ease;
   }
   
-  /* Focus style */
   .custom-datepicker:focus {
     outline: none;
     box-shadow: 0 0 0 2px #8e44ad;
   }
   
-  /* Change calendar icon color to black */
   .react-datepicker__calendar-icon {
-    filter: brightness(0); /* turns it black */
+    filter: brightness(0);
   }
   
-  /* Optional: align icon nicely */
   .react-datepicker-wrapper {
     width: 100%;
+  }
+  
+  .terms-label {
+    font-size: 16px; /* Adjust the overall font size */
+    line-height: 1.5;
+  }
+  
+  .terms-link {
+    color: #0078d4; /* Link color */
+    text-decoration: underline;
+    font-size: 18px; /* Increase the font size of the link itself */
+  }
+  
+  .terms-link:hover {
+    color: #005fa3; /* Hover color */
   }
   

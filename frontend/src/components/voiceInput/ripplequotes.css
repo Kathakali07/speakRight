@@ -1,0 +1,88 @@
+/* Ripple Circle container */
+.ripple-circle {
+    position: absolute;
+    left: 42%; /* Horizontally center it */
+    top: 30%; /* Adjust to place it in the middle vertically */
+    transform: translate(-50%, -50%); /* Center it perfectly */
+    width: 200px; /* Adjust the size */
+    height: 200px; /* Adjust the size */
+    border-radius: 50%;
+    background-color: #0078d4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: pulse 1.5s infinite ease-in-out;
+    z-index: 2; /* Ensure it's on top */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0.9; /* Slightly transparent for a sleek look */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow around the circle */
+  }
+  
+  /* Ripple effect styles */
+  .ripple {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple 2s infinite;
+  }
+  
+  /* Ripple animation keyframes */
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+  
+  /* Pulse animation for the circle */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Center the text inside the circle */
+  .message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Perfectly center the message */
+    font-size: 16px; /* Adjust font size */
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out; /* Smooth fade transition */
+  }
+  
+  /* Add transition effects to ripple animation */
+  .ripple-circle.active .ripple {
+    animation: ripple 2s ease-in-out;
+  }
+  
+  /* Optional: Add hover effect on the ripple circle for interactivity */
+  .ripple-circle:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover for a more interactive feel */
+  }
+  

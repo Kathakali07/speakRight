@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './signupform.css';
 
-function SignupForm({ onSwitchToSignin }) {
+function SignupForm({ onSwitchToSignin, onSignUpSuccess }) {
   const [dob, setDob] = useState(null);
   const [agreed, setAgreed] = useState(false);
 
@@ -13,7 +13,7 @@ function SignupForm({ onSwitchToSignin }) {
       alert('You must agree to the Terms and Conditions.');
       return;
     }
-    alert('Form submitted!');
+    onSignUpSuccess();
   };
 
   return (
@@ -56,8 +56,9 @@ function SignupForm({ onSwitchToSignin }) {
               onChange={(e) => setAgreed(e.target.checked)}
               required
             />
-            I agree to the <a href="#">Terms and Conditions</a>
+            I agree to the <a href="#" className="terms-link">Terms and Conditions</a>
           </label>
+
 
           <button type="submit">Sign up</button>
         </form>

@@ -4,7 +4,7 @@ import './signup.css';
 function SignupButton({ onClick }) {
   return (
     <button className="signup-button" onClick={onClick}>
-      Sign Up
+      Get Started
     </button>
   );
 }

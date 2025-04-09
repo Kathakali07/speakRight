@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './signin.css'; 
 
-function SigninForm({ onSwitchToSignup }) {
+function SigninForm({ onSwitchToSignup, onSignInSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignin = (e) => {
     e.preventDefault();
     alert('Sign in submitted!');
+    onSignInSuccess();
   };
 
   return (
