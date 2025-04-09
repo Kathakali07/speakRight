@@ -53,9 +53,10 @@ body {
 .cursive-text {
   font-family: 'Lucida Handwriting', cursive;
   font-size: 4rem;
+  color: #5e7c98;
 }
 
-.next-big-text .signup_line{
-  font-family: Georgia, serif;
+.next-big-text{
+  font-family:"Courier New",monospace;
   font-size: 2rem;
 }

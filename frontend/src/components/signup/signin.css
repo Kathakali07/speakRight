@@ -1,0 +1,64 @@
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f7f9fb;
+}
+
+.signup-card {
+  background: white;
+  padding: 30px 40px; /* smaller padding for Sign In */
+  border-radius: 10px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  min-height: 300px; /* smaller height */
+}
+
+.signup-button {
+  background-color: #4c5664;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #121314;
+}
+
+.signup-line-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 7px;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 2.2rem;
+}
+
+.signup_line {
+  margin: 0;
+  font-size: 16px;
+  font-family: 'Lora', serif;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.login-text {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.login-text span {
+  color: #4c5664;
+  cursor: pointer;
+  font-weight: bold;
+}

@@ -1,0 +1,35 @@
+.signup-button {
+    background-color: #4c5664;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-button:hover {
+    background-color: #121314;
+  }
+  .signup-line-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 7px;
+    font-family: "Courier Nw", monospace;
+    font-weight: bold;
+    font-size: 2.2rem; 
+  }  
+  
+  .signup_line {
+    margin: 0;
+    font-size: 16px;
+    font-family: 'Lora', serif;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  

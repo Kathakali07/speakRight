@@ -43,10 +43,11 @@
   font-weight: bold; 
   text-transform: capitalize;
   margin-left: 80px;
-  font-family: "Courier New",monospace;
+  font-family: 'Lora', serif;
+  font-size: 1.4rem;
 }
 
 .navbar-brand{
   font-weight: bold;
-  font-family: "Courier New",monospace;
+  font-family: 'Roboto Slab', serif;
 }
