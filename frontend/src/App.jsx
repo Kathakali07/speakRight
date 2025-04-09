@@ -7,8 +7,9 @@ function App() {
     <>
       <Navbar />
       <div className="main-content">
-        <h1>Welcome to SpeakRight</h1>
-        <p>Your journey to confident English speaking starts here.</p>
+        <h1 className="cursive-text">Welcome to SpeakRight</h1>
+        <h2 className="next-big-text">English is A Journey</h2>
+        <p classname="signup_line">To Talk Your Way to the Top!</p>
       </div>
     </>
   );

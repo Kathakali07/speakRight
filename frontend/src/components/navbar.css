@@ -1,37 +1,52 @@
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    background-color: #f8f9fa;
-    padding: 12px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  }
-  
-  .container-fluid {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    padding-left: 0;
-    padding-right: 20px; /* Optional */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar-left {
-    display:flex;
-    align-items: center;
-  }
-  
-  .navbar-logo {
-    width: 60px;
-    height: auto;
-    margin-right: 9px;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: #f8f9fa;
+  padding: 12px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-size: 1.8rem;
+}
 
-  .navbar-nav .nav-link {
-    margin-left: 80px;
-  }
-  
+.container-fluid {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 20px; /* Optional */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-left {
+  display:flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;     
+  border-radius: 30%;     
+  margin-right: 9px;
+}  
+
+.navbar-nav {
+  margin-left: 80px;
+}
+
+.nav-link {
+  color: #8576b6;
+  font-weight: bold; 
+  text-transform: capitalize;
+  margin-left: 80px;
+  font-family: "Courier New",monospace;
+}
+
+.navbar-brand{
+  font-weight: bold;
+  font-family: "Courier New",monospace;
+}

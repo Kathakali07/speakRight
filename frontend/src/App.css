@@ -49,3 +49,13 @@ body {
 .main-content {
   padding-top: 80px; /* Adjust based on your navbar height */
 }
+
+.cursive-text {
+  font-family: 'Lucida Handwriting', cursive;
+  font-size: 4rem;
+}
+
+.next-big-text .signup_line{
+  font-family: Georgia, serif;
+  font-size: 2rem;
+}
