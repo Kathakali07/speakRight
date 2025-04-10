@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import './signin.css'; 
+import './signin.css';
 
 function SigninForm({ onSwitchToSignup, onSignInSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSignin = (e) => {
+  const handleSignin = async (e) => {
     e.preventDefault();
     alert('Sign in submitted!');
     onSignInSuccess();
@@ -15,6 +17,7 @@ function SigninForm({ onSwitchToSignup, onSignInSuccess }) {
     <div className="signup-container">
       <div className="signup-card">
         <h2>Sign in</h2>
+        {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSignin}>
           <input
             type="email"
@@ -30,10 +33,12 @@ function SigninForm({ onSwitchToSignup, onSignInSuccess }) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Sign in</button>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Signing in...' : 'Sign in'}
+          </button>
         </form>
         <div className="login-text">
-          Don’t have an account? <span onClick={onSwitchToSignup}>Sign up</span>
+          Don't have an account? <span onClick={onSwitchToSignup}>Sign up</span>
         </div>
       </div>
     </div>
