@@ -62,3 +62,36 @@
   cursor: pointer;
   font-weight: bold;
 }
+
+.error-message {
+  color: #ff3860;
+  background: #fff5f5;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #ff3860;
+}
+
+.error {
+  border-color: #ff3860 !important;
+}
+
+.loading {
+  position: relative;
+  opacity: 0.7;
+}
+
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

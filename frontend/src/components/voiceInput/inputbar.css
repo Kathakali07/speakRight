@@ -118,3 +118,33 @@ audio {
   margin-right: 8px; /* Adds space between icon and text */
   font-size: 18px; /* Icon size */
 }
+
+.result-box {
+  border: 2px solid #ffffff66; /* white border with transparency */
+  background-color: transparent; /* make background same as outer */
+  padding: 20px;
+  border-radius: 16px;
+  color: #ffffff; /* bright text for dark background */
+  margin-top: 20px;
+  width: fit-content;
+  max-width: 80%;
+  text-align: left;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* optional soft glow */
+}
+
+.result-box h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.result-box p, .result-box li {
+  color: #e0e0e0;
+  line-height: 1.5;
+}
+
+.result-box ul {
+  list-style: disc;
+  margin-left: 20px;
+}

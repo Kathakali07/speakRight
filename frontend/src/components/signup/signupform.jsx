@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './signupform.css';
 
-function SignupForm({ onSwitchToSignin, onSignUpSuccess }) {
+function SignupForm({ onAuthSuccess, onSwitchToSignin }) {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -32,7 +33,35 @@ function SignupForm({ onSwitchToSignin, onSignUpSuccess }) {
       setError('Passwords do not match!');
       return;
     }
-    alert('Form submitted!');
+    
+    setLoading(true);
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/accounts/signup/', {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password
+      });
+
+      if (response.data.message === 'User registered successfully') {
+        // After successful signup, automatically log the user in
+        const loginResponse = await axios.post('http://localhost:8000/api/accounts/login/', {
+          email: formData.email,
+          password: formData.password
+        });
+        
+        if (loginResponse.data.access) {
+          onAuthSuccess(loginResponse.data);
+        }
+      }
+    } catch (err) {
+      const errorMessage = err.response?.data?.error || 
+                         err.response?.data?.detail || 
+                         'Signup failed. Please try again.';
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -83,7 +112,9 @@ function SignupForm({ onSwitchToSignin, onSignUpSuccess }) {
             I agree to the <a href="#" className="terms-link">Terms and Conditions</a>
           </label>
 
-          <button type="submit">Sign up</button>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Creating account...' : 'Sign up'}
+          </button>
         </form>
         <div className="login-text">
           Already have an account? <span onClick={onSwitchToSignin}>Sign in</span>
