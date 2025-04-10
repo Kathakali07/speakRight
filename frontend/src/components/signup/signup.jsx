@@ -1,12 +1,15 @@
+// signup.jsx
 import React from 'react';
-import './signup.css';
 
-function SignupButton({ onClick }) {
+const SignupButton = ({ onClick }) => {
   return (
-    <button className="signup-button" onClick={onClick}>
-      Sign Up
+    <button
+      onClick={onClick}
+      className="get-started-button bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded"
+    >
+      Get Started
     </button>
   );
-}
+};
 
 export default SignupButton;

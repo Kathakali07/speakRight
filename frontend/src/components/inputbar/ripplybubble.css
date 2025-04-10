@@ -1,0 +1,117 @@
+/* Ensure the voice bar container is correctly positioned */
+.voice-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px; /* Adjusted the margin for better vertical centering */
+    padding: 160px;
+  }
+  
+  /* Voice input bar styling */
+  .voice-input-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Adjust the width to fit container */
+    max-width: 600px;
+    background: linear-gradient(145deg, #7794fc, #f5f5f5);
+    border-radius: 50px;
+    padding: 15px 100px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1), 0px 1px 4px rgba(0, 0, 0, 0.05);
+    position: relative; /* Relative positioning to position the ripple circle inside */
+    transition: box-shadow 0.3s ease;
+  }
+  
+  /* Hover effect for voice input bar */
+  .voice-input-bar:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15), 0px 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Ripple Circle inside the voice input bar (keeping previous position) */
+  .ripple-circle {
+    position: absolute;
+    left: 42%; /* Horizontally centered inside the voice input bar */
+    top: 110%; /* Adjusted to place it inside the bar */
+    transform: translate(-50%, -50%); /* Center it perfectly */
+    width: 200px; /* Adjust the size */
+    height: 200px; /* Adjust the size */
+    border-radius: 50%;
+    background-color: #525ff6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: pulse 1.5s infinite ease-in-out;
+    z-index: 2; /* Ensure it's on top */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0.9; /* Slightly transparent for a sleek look */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow around the circle */
+  }
+  
+  /* Ripple effect styles */
+  .ripple {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple 2s infinite;
+  }
+  
+  /* Ripple animation keyframes */
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+  
+  /* Pulse animation for the circle */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Center the text inside the circle */
+  .message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Perfectly center the message */
+    font-size: 16px; /* Adjust font size */
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out; /* Smooth fade transition */
+  }
+  
+  /* Add transition effects to ripple animation */
+  .ripple-circle.active .ripple {
+    animation: ripple 2s ease-in-out;
+  }
+  
+  /* Optional: Add hover effect on the ripple circle for interactivity */
+  .ripple-circle:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover for a more interactive feel */
+  }
+  
