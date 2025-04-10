@@ -3,7 +3,8 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from django.http import JsonResponse
 import nltk
 import torch
-
+import re
+import string
 
 def set_seed(seed):
     torch.manual_seed(seed)
@@ -11,30 +12,37 @@ def set_seed(seed):
         torch.cuda.manual_seed_all(seed)
 
 try:
-    nltk.data.find('tokenizers/punkt_tab/english/')
+    nltk.data.find('tokenizers/punkt/english')
 except LookupError:
-    nltk.download('punkt_tab')
-
+    nltk.download('punkt')
 
 set_seed(1212)
-
 gf = Gramformer(models=1, use_gpu=False)
 
+# Utility to preprocess text: remove punctuation, lowercase
+def preprocess_text(text):
+    text = re.sub(r'[^\w\s]', '', text)  # Remove punctuation
+    return text.lower().split()
+
+# Check if the change is significant (not just punctuation or case)
+def is_significant_change(original, corrected):
+    orig_clean = original.strip(string.punctuation).lower()
+    corr_clean = corrected.strip(string.punctuation).lower()
+    return orig_clean != corr_clean
 
 def count_words(text):
     """
-    Count the total number of words in the given text.
+    Count the total number of meaningful words in the given text (ignores punctuation).
     """
-    words = word_tokenize(text)
+    words = preprocess_text(text)
     return len(words)
-
 
 def count_changed_words(input_text, corrected_text):
     """
-    Count the number of words that have been changed between input and corrected text.
+    Count the number of word-level changes, ignoring punctuation and case.
     """
-    words_input = word_tokenize(input_text)
-    words_corrected = word_tokenize(corrected_text)
+    words_input = preprocess_text(input_text)
+    words_corrected = preprocess_text(corrected_text)
 
     changed_words = 0
     for word_input, word_corrected in zip(words_input, words_corrected):
@@ -43,11 +51,10 @@ def count_changed_words(input_text, corrected_text):
 
     return changed_words
 
-
 def calculate_accuracy(input_text, corrected_text):
     """
-    Calculate the accuracy based on the formula:
-    ((Total words - Changed words) / Total words) * 100
+    Accuracy = ((Total words - Changed words) / Total words) * 100
+    Ignores punctuation and case differences.
     """
     total_words = count_words(input_text)
     changed_words = count_changed_words(input_text, corrected_text)
@@ -55,8 +62,7 @@ def calculate_accuracy(input_text, corrected_text):
     if total_words == 0:
         return 0
     accuracy = ((total_words - changed_words) / total_words) * 100
-    return accuracy
-
+    return round(accuracy, 2)
 
 def grammar_corrector(input_text):
     """
@@ -68,7 +74,6 @@ def grammar_corrector(input_text):
     corrected_sentences = []
     changes = []
 
-    # Process each sentence to correct grammar
     for s in sentences:
         if s.strip():
             new_corrected_sentences = gf.correct(s, max_candidates=1)
@@ -77,18 +82,13 @@ def grammar_corrector(input_text):
             for corrected_sentence in new_corrected_sentences:
                 output_text.append(corrected_sentence)
 
-                # Get the edits made to the sentence
                 edits = gf.get_edits(s, corrected_sentence)
-                change_details = []
-
                 for edit in edits:
-                    change_str = f"{edit[1]} ➔ {edit[4]}"
-                    changes.append(change_str)
+                    if is_significant_change(edit[1], edit[4]):
+                        change_str = f"{edit[1]} ➔ {edit[4]}"
+                        changes.append(change_str)
 
-    # Join the corrected sentences to form the final corrected text
     corrected_text = " ".join(corrected_sentences)
-
-    # Calculate the accuracy based on word changes
     accuracy = calculate_accuracy(input_text, corrected_text)
 
     return {
