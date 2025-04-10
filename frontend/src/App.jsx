@@ -87,7 +87,7 @@ function App() {
         <h2>Contact Us</h2>
         <div className="team-icons">
           <div className="team-member">
-            <img src="team1.jpg" alt="Member 1" className="team-pic" />
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="JANNATUN KHUSBU" className="team-pic" />
             <p>JANNATUN KHUSBU</p>
             <div className="social-links">
               <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
@@ -102,7 +102,7 @@ function App() {
             </div>
           </div>
           <div className="team-member">
-            <img src="team2.jpg" alt="Member 2" className="team-pic" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Member 2" className="team-pic" />
             <p>SATYAM PUITANDY</p>
             <div className="social-links">
               <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
@@ -117,7 +117,7 @@ function App() {
             </div>
           </div>
           <div className="team-member">
-            <img src="team3.jpg" alt="Member 3" className="team-pic" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Member 3" className="team-pic" />
             <p>KATHAKALI DAS</p>
             <div className="social-links">
               <a href="https://www.linkedin.com/in/kathakali-kd-46a93623b" target="_blank" rel="noopener noreferrer">
